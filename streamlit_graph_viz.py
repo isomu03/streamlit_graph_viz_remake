@@ -5,7 +5,8 @@ import numpy as np
 import seaborn as sns
 import plotly.express as px
 # 内部モジュール
-from viz_functions import make_columns,show_graph,show_graph_and_table,time_series_graph,scatter_bycategory,scatters,flight_line_chart,exercise_graph
+from viz_functions import make_columns,show_graph,show_graph_and_table,time_series_graph,scatter_bycategory,scatters
+from viz_functions import flight_line_chart,exercise_graph,line_graph_bycategory,scatter_bycategory_onegraph
 
 
 # ヘッダー
@@ -40,6 +41,9 @@ tab1,tab2,tab3,tab4,tab5,tab6,tab7,tab8,tab9,tab10,tab11,tab12,tab13,tab14,tab15
                                     "Taxis"
                                     ])
 
+# カテゴリごとにグラフと統計量を表示するための統計量リスト
+static_list = ['最大値','最小値','平均値','中央値','合計']
+
 
 # Tipsデータタブ
 with tab1:      
@@ -68,7 +72,6 @@ with tab1:
     # データを表示(今回はseabornのtipsデータを表示)
     st.write("seaborn tipsデータ")
     
-
     # データを表示
     if st.button('データを表示する',key='tips_button' ):
         tips = sns.load_dataset("tips")
@@ -110,7 +113,8 @@ df = sns.load_dataset('tips')
     #統計量を決める
     statistic = st.selectbox(
         '調べたい統計量を選んでください',
-        ['最大値','最小値','平均値','中央値','合計']
+        static_list,
+        key='tips_static_option'
     )
 
     all_columns_tips = ['total_bill','tip','size','sex','smoker','day','time']
@@ -144,8 +148,11 @@ df = sns.load_dataset('tips')
         key='tips_scatter_category'
     )
 
-    if st.button('グラフを表示する',key='tips_scatter_by_category_button' ):
+    if st.button('カテゴリごとにグラフを分割して表示',key='tips_scatter_by_category_button' ):
         scatter_bycategory("tips",num_options_x_tips,num_options_y_tips,category_options_tips)
+
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='tips_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("tips",num_options_x_tips,num_options_y_tips,category_options_tips)
 
 
 # タイタニックデータタブ
@@ -223,18 +230,21 @@ df = sns.load_dataset('titanic')
     #統計量を決める
     statistic_titanic = st.selectbox(
         '調べたい統計量を選んでください',
-        ['最大値','最小値','平均値','中央値','合計'],
+        static_list,
         key='titanic_static_option' 
     )
 
-    all_columns_titanic = ['survived','age','parch','fare','sibsp','pclass','sex','embarked','class','adult_male','deck','embark_town','alive','alone','who']
+    all_columns_titanic = ['survived','age','parch','fare','sibsp',
+                           'pclass','sex','embarked','class','adult_male',
+                           'deck','embark_town','alive','alone','who']
 
 
         
     # グラフと表を作成
     if st.button('統計量とグラフを表示する',key='titanic_stats_graph_button' ):
         titanic = sns.load_dataset("titanic")
-        show_graph_and_table(category_options_taitanic,num_options_titanic,statistic_titanic,titanic,all_columns_titanic)
+        show_graph_and_table(category_options_taitanic,num_options_titanic,
+                             statistic_titanic,titanic,all_columns_titanic)
 
     ### カテゴリーごとに散布図を表示
     st.write(" \n \n ")
@@ -259,8 +269,11 @@ df = sns.load_dataset('titanic')
         key='titanic_scatter_category'
     )
 
-    if st.button('グラフを表示する',key='titanic_scatter_by_category_button' ):
+    if st.button('カテゴリごとにグラフを分割して表示',key='titanic_scatter_by_category_button' ):
         scatter_bycategory("titanic",num_options_x_titanic,num_options_y_titanic,category_options_titanic)
+
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='titanic_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("titanic",num_options_x_titanic,num_options_y_titanic,category_options_titanic)
 
 
 
@@ -330,7 +343,7 @@ df = sns.load_dataset('anagrams')
     #統計量を決める
     statistic_anagram = st.selectbox(
         '調べたい統計量を選んでください',
-        ['最大値','最小値','平均値','中央値','合計'],
+        static_list,
         key='anagram_statistic'
     )
 
@@ -340,7 +353,8 @@ df = sns.load_dataset('anagrams')
     # グラフと表を表示
     if st.button('統計量とグラフを表示する',key='anagram_stats_graph_button' ):
         anagram = sns.load_dataset("anagrams")
-        show_graph_and_table(category_options_anagram,num_options_anagram,statistic_anagram,anagram,all_columns_anagram)
+        show_graph_and_table(category_options_anagram,num_options_anagram,
+                             statistic_anagram,anagram,all_columns_anagram)
 
     ### カテゴリーごとに散布図を表示
     st.write(" \n \n ")
@@ -365,8 +379,11 @@ df = sns.load_dataset('anagrams')
         key='anagram_scatter_category'
     )
 
-    if st.button('グラフを表示する',key='anagram_scatter_by_category_button' ):
+    if st.button('カテゴリごとにグラフを分割して表示',key='anagram_scatter_by_category_button' ):
         scatter_bycategory("anagrams",num_options_x_anagram,num_options_y_anagram,category_options_anagram)
+
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='anagram_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("anagrams",num_options_x_anagram,num_options_y_anagram,category_options_anagram)
 
 
 # anscombeデータタブ
@@ -375,7 +392,8 @@ with tab4:
     st.subheader("データの概要")
     # 文章を挿入
     st.markdown('''
-    このデータセットは、4つのグループ（I, II, III, IV）に分かれた、それぞれ11組ずつの $(x, y)$ のペア（合計44行）で構成されています。 \n
+    このデータセットは、4つのグループ（I, II, III, IV）に分かれた、
+    それぞれ11組ずつの $(x, y)$ のペア（合計44行）で構成されています。 \n
     最大のポイントは、4つのグループすべてにおいて、平均値、分散、相関係数、回帰直線などの「統計量」がほぼ完全に一致するという点です。
     しかし、実際にグラフ（散布図）を描いてみると、以下のように全く異なる形をしています。\n
     グループ I: 一般的な直線的な関係（線形関係）\n 
@@ -443,7 +461,7 @@ df = sns.load_dataset('anscombe')
     #統計量を決める
     statistic_ansconbe = st.selectbox(
         '調べたい統計量を選んでください',
-        ['最大値','最小値','平均値','中央値','合計'],
+        static_list,
         key='ansconbe_statistic'
     )
 
@@ -452,7 +470,8 @@ df = sns.load_dataset('anscombe')
     # グラフと表を表示
     if st.button('統計量とグラフを表示する',key='anscombe_stats_graph_button' ):
         ansconbe = sns.load_dataset("anscombe")
-        show_graph_and_table(category_options_ansconbe,num_options_ansconbe,statistic_ansconbe,ansconbe,all_columns_ansconbe)
+        show_graph_and_table(category_options_ansconbe,num_options_ansconbe,
+                             statistic_ansconbe,ansconbe,all_columns_ansconbe)
 
 
     ### カテゴリーごとに散布図を表示
@@ -478,8 +497,11 @@ df = sns.load_dataset('anscombe')
         key='ansconbe_scatter_category'
     )
 
-    if st.button('グラフを表示する',key='ansconbe_scatter_by_category_button' ):
+    if st.button('カテゴリごとにグラフを分割して表示',key='ansconbe_scatter_by_category_button' ):
         scatter_bycategory("anscombe",num_options_x_ansconbe,num_options_y_ansconbe,category_options_ansconbe)
+
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='anscombe_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("anscombe",num_options_x_ansconbe,num_options_y_ansconbe,category_options_ansconbe)
 
 
 # attentionデータタブ
@@ -489,7 +511,9 @@ with tab5:
     # 文章を挿入
     st.markdown('''
     このデータセットは、心理学や認知科学の実験データを模したデータセットです。\n
-    「注意の集中度合い」と「タスクの難易度（解の数）」という2つの要素が、最終的な「テストの成績（スコア）」にどのような影響を与えるか、そしてそれらがどう相互に作用しているかを分析するために作られています。 \n
+    「注意の集中度合い」と「タスクの難易度（解の数）」という2つの要素が、
+    最終的な「テストの成績（スコア）」にどのような影響を与えるか、
+    そしてそれらがどう相互に作用しているかを分析するために作られています。 \n
     \n\n\n
     以下変数一覧です \n
     ・Unnamed: 0:行のインデックス（通し番号） \n
@@ -553,7 +577,7 @@ df = sns.load_dataset('attention')
     #統計量を決める
     statistic_attention = st.selectbox(
         '調べたい統計量を選んでください',
-        ['最大値','最小値','平均値','中央値','合計'],
+        static_list,
         key='attention_statistic'
     )
 
@@ -563,7 +587,8 @@ df = sns.load_dataset('attention')
     # グラフと表を表示
     if st.button('統計量とグラフを表示する',key='attention_stats_graph_button' ):
         attention = sns.load_dataset("attention")
-        show_graph_and_table(category_options_attention,num_options_attention,statistic_attention,attention,all_columns_attention)
+        show_graph_and_table(category_options_attention,num_options_attention,
+                             statistic_attention,attention,all_columns_attention)
 
 
     ### カテゴリーごとに散布図を表示
@@ -589,8 +614,11 @@ df = sns.load_dataset('attention')
         key='attention_scatter_category'
     )
 
-    if st.button('グラフを表示する',key='attention_scatter_by_category_button' ):
+    if st.button('カテゴリごとにグラフを分割して表示',key='attention_scatter_by_category_button' ):
         scatter_bycategory("attention",num_options_x_attention,num_options_y_attention,category_options_attention)
+
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='attention_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("attention",num_options_x_attention,num_options_y_attention,category_options_attention)
 
 # car crashesデータ
 with tab6:      
@@ -667,17 +695,19 @@ df = sns.load_dataset('car_crashes')
     #統計量を決める
     statistic_car_crashes = st.selectbox(
         '調べたい統計量を選んでください',
-        ['最大値','最小値','平均値','中央値','合計'],
+        static_list,
         key='car_crashes_statistic'
     )
 
-    all_columns_car_crashes = ['total','speeding','alcohol','not_distracted','no_previous','ins_premium','ins_losses','abbrev']
+    all_columns_car_crashes = ['total','speeding','alcohol','not_distracted',
+                               'no_previous','ins_premium','ins_losses','abbrev']
 
 
     # グラフと表を表示
     if st.button('統計量とグラフを表示する',key='car_crashes_stats_graph_button' ):
         car_crashes = sns.load_dataset("car_crashes")
-        show_graph_and_table(category_options_car_crashes,num_options_car_crashes,statistic_car_crashes,car_crashes,all_columns_car_crashes)
+        show_graph_and_table(category_options_car_crashes,num_options_car_crashes,
+                             statistic_car_crashes,car_crashes,all_columns_car_crashes)
 
     ### カテゴリーごとに散布図を表示
     st.write(" \n \n ")
@@ -697,6 +727,10 @@ df = sns.load_dataset('car_crashes')
 
     if st.button('グラフを表示する',key='car_crashes_scatter_by_category_button' ):
         scatters("car_crashes",num_options_x_car_crashes,num_options_y_car_crashes)
+
+    
+    
+    
 
 
 # Diamondsデータ
@@ -775,7 +809,7 @@ df = sns.load_dataset('diamonds')
     #統計量を決める
     statistic_diamonds = st.selectbox(
         '調べたい統計量を選んでください',
-        ['最大値','最小値','平均値','中央値','合計'],
+        static_list,
         key='diamonds_statistic'
     )
 
@@ -784,7 +818,11 @@ df = sns.load_dataset('diamonds')
     # グラフと表を表示
     if st.button('統計量とグラフを表示する',key='diamonds_stats_graph_button' ):
         diamonds = sns.load_dataset("diamonds")
-        show_graph_and_table(category_options_diamonds,num_options_diamonds,statistic_diamonds,diamonds,all_columns_diamonds)
+        show_graph_and_table(category_options_diamonds,num_options_diamonds,
+                             statistic_diamonds,diamonds,all_columns_diamonds)
+    
+    
+
 
 
     ### カテゴリーごとに散布図を表示
@@ -810,8 +848,11 @@ df = sns.load_dataset('diamonds')
         key='diamonds_scatter_category'
     )
 
-    if st.button('グラフを表示する',key='diamonds_scatter_by_category_button' ):
+    if st.button('カテゴリごとにグラフを分割して表示',key='diamonds_scatter_by_category_button' ):
         scatter_bycategory("diamonds",num_options_x_diamonds,num_options_y_diamonds,category_options_diamonds)
+
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='diamonds_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("diamonds",num_options_x_diamonds,num_options_y_diamonds,category_options_diamonds)
 
 
 
@@ -894,7 +935,7 @@ df = sns.load_dataset('dots')
     #統計量を決める
     statistic_dots = st.selectbox(
         '調べたい統計量を選んでください',
-        ['最大値','最小値','平均値','中央値','合計'],
+        static_list,
         key='dots_statistic'
     )
 
@@ -904,7 +945,8 @@ df = sns.load_dataset('dots')
     # グラフと表を表示
     if st.button('統計量とグラフを表示する',key='dots_stats_graph_button' ):
         dots = sns.load_dataset("dots")
-        show_graph_and_table(category_options_dots,num_options_dots,statistic_dots,dots,all_columns_dots)
+        show_graph_and_table(category_options_dots,num_options_dots,
+                             statistic_dots,dots,all_columns_dots)
 
 
     ### カテゴリーごとに散布図を表示
@@ -930,8 +972,11 @@ df = sns.load_dataset('dots')
         key='dots_scatter_category'
     )
 
-    if st.button('グラフを表示する',key='dots_scatter_by_category_button' ):
+    if st.button('カテゴリごとにグラフを分割して表示',key='dots_scatter_by_category_button' ):
         scatter_bycategory("dots",num_options_x_dots,num_options_y_dots,category_options_dots)
+    
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='dots_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("dots",num_options_x_dots,num_options_y_dots,category_options_dots)
 
 
 
@@ -941,7 +986,8 @@ with tab9:
     st.subheader("データの概要")
     # 文章を挿入
     st.markdown('''
-    dowjones（ダウ・ジョーンズ）は、アメリカの代表的な株価指数である「ダウ・ジョーンズ工業株価平均（Dow Jones Industrial Average: DJIA）」の歴史的な時系列データです。\n
+    dowjones（ダウ・ジョーンズ）は、アメリカの代表的な株価指数である
+    「ダウ・ジョーンズ工業株価平均（Dow Jones Industrial Average: DJIA）」の歴史的な時系列データです。\n
     このデータセットは、1914年から1968年までの約50年間にわたるダウ平均株価の推移を記録しています。 \n
     \n\n\n
     以下変数一覧です \n
@@ -995,7 +1041,8 @@ with tab10:
     st.subheader("データの概要")
     # 文章を挿入
     st.markdown('''
-    このデータセットは、30人の被験者が「1分間」「15分間」「30分間」という異なる運動時間を経た際の心拍数を記録したものです。 \n
+    このデータセットは、30人の被験者が「1分間」「15分間」「30分間」という
+    異なる運動時間を経た際の心拍数を記録したものです。 \n
     \n\n\n
     以下変数一覧です \n
     ・Unnamed: 0:行のインデックス（通し番号）\n
@@ -1065,7 +1112,7 @@ df = sns.load_dataset('exercise')
     #統計量を決める
     statistic_exercise = st.selectbox(
         '調べたい統計量を選んでください',
-        ['最大値','最小値','平均値','中央値','合計'],
+        static_list,
         key='exercise_statistic'
     )
 
@@ -1075,7 +1122,8 @@ df = sns.load_dataset('exercise')
     # グラフと表を表示
     if st.button('統計量とグラフを表示する',key='exercise_stats_graph_button' ):
         exercise = sns.load_dataset("exercise")
-        show_graph_and_table(category_options_exercise,num_options_exercise,statistic_exercise,exercise,all_columns_exercise)
+        show_graph_and_table(category_options_exercise,num_options_exercise,
+                             statistic_exercise,exercise,all_columns_exercise)
 
     ### カテゴリーごとに散布図を表示
     st.write(" \n \n ")
@@ -1088,8 +1136,11 @@ df = sns.load_dataset('exercise')
         key='exercise_scatter_category'
     )
 
-    if st.button('グラフを表示する',key='exercise_scatter_by_category_button' ):
+    if st.button('カテゴリごとにグラフを分割して表示',key='exercise_scatter_by_category_button' ):
         exercise_graph(category_options_exercise)
+    
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='exercise_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("exercise",'time','pulse',category_options_exercise)
 
 # Flightsデータ(グラフの機能要修正)
 with tab11:      
@@ -1160,7 +1211,7 @@ df = sns.load_dataset('flights')
     #統計量を決める
     statistic_flights = st.selectbox(
         '調べたい統計量を選んでください',
-        ['最大値','最小値','平均値','中央値','合計'],
+        static_list,
         key='flights_statistic'
     )
 
@@ -1170,7 +1221,8 @@ df = sns.load_dataset('flights')
     # グラフと表を表示
     if st.button('統計量とグラフを表示する',key='flights_stats_graph_button' ):
         flights = sns.load_dataset("flights")
-        show_graph_and_table(category_options_flights,num_options_flights,statistic_flights,flights,all_columns_flights)
+        show_graph_and_table(category_options_flights,num_options_flights,
+                             statistic_flights,flights,all_columns_flights)
 
 
     ### 時系列グラフを表示
@@ -1187,8 +1239,10 @@ with tab12:
     # 文章を挿入
     st.markdown('''
     このデータセットは、脳科学・神経科学の実験データをまとめた時系列データセットです。 \n
-    fMRI(機能的磁気共鳴画像法)を使って、被験者が特定のタスク（刺激）を行っているときの脳の活動（血流の変化）を時間経過とともに測定したデータです。\n
-    14人の被験者（subject）が「刺激（stim）」または「視覚的な手がかり（cue）」を与えられた際に、脳の特定の領域（parietal：頭頂葉、frontal：前頭葉）で起こった血流の応答変化（BOLD信号）を時系列で記録したものです。 
+    fMRI(機能的磁気共鳴画像法)を使って、被験者が特定のタスク（刺激）を行っているときの脳の活動（血流の変化）を
+    時間経過とともに測定したデータです。\n
+    14人の被験者（subject）が「刺激（stim）」または「視覚的な手がかり（cue）」を与えられた際に、
+    脳の特定の領域（parietal：頭頂葉、frontal：前頭葉）で起こった血流の応答変化（BOLD信号）を時系列で記録したものです。 
     \n\n\n
     以下変数一覧です \n
     ・subject:被験者ID。s0 から s13 までの計14人の被験者を識別するためのID\n
@@ -1256,7 +1310,7 @@ df = sns.load_dataset('fmri')
     #統計量を決める
     statistic_fmri = st.selectbox(
         '調べたい統計量を選んでください',
-        ['最大値','最小値','平均値','中央値','合計'],
+        static_list,
         key='fmri_statistic'
     )
 
@@ -1292,8 +1346,11 @@ df = sns.load_dataset('fmri')
         key='fmri_scatter_category'
     )
 
-    if st.button('グラフを表示する',key='fmri_scatter_by_category_button' ):
+    if st.button('カテゴリごとにグラフを分割して表示',key='fmri_scatter_by_category_button' ):
         scatter_bycategory("fmri",num_options_x_fmri,num_options_y_fmri,category_options_fmri)
+
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='fmri_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("fmri",num_options_x_fmri,num_options_y_fmri,category_options_fmri)
 
 
 # geyserデータ 
@@ -1302,7 +1359,8 @@ with tab13:
     st.subheader("データの概要")
     # 文章を挿入
     st.markdown('''
-    geyser（ガイザー）は、アメリカのイエローストーン国立公園にある有名な間欠泉（一定周期で水や熱湯を噴き出す温泉）「オールド・フェイスフル・ガイザー（Old Faithful Geyser）」の噴火に関する観測データです。 \n
+    geyser（ガイザー）は、アメリカのイエローストーン国立公園にある有名な間欠泉（一定周期で水や熱湯を噴き出す温泉）
+    「オールド・フェイスフル・ガイザー（Old Faithful Geyser）」の噴火に関する観測データです。 \n
     
     \n\n\n
     以下変数一覧です \n
@@ -1367,7 +1425,7 @@ df = sns.load_dataset('geyser')
     #統計量を決める
     statistic_geyser = st.selectbox(
         '調べたい統計量を選んでください',
-        ['最大値','最小値','平均値','中央値','合計'],
+        static_list,
         key='geyser_statistic'
     )
 
@@ -1377,7 +1435,8 @@ df = sns.load_dataset('geyser')
     # グラフと表を表示
     if st.button('統計量とグラフを表示する',key='geyser_stats_graph_button' ):
         geyser = sns.load_dataset("geyser")
-        show_graph_and_table(category_options_geyser,num_options_geyser,statistic_geyser,geyser,all_columns_geyser)
+        show_graph_and_table(category_options_geyser,num_options_geyser,
+                             statistic_geyser,geyser,all_columns_geyser)
 
 
     ### カテゴリーごとに散布図を表示
@@ -1403,8 +1462,11 @@ df = sns.load_dataset('geyser')
         key='geyser_scatter_category'
     )
 
-    if st.button('グラフを表示する',key='geyser_scatter_by_category_button' ):
+    if st.button('カテゴリごとにグラフを分割して表示',key='geyser_scatter_by_category_button' ):
         scatter_bycategory("geyser",num_options_x_geyser,num_options_y_geyser,category_options_geyser)
+
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='geyser_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("geyser",num_options_x_geyser,num_options_y_geyser,category_options_geyser)
 
 
 
@@ -1414,8 +1476,10 @@ with tab14:
     st.subheader("データの概要")
     # 文章を挿入
     st.markdown('''
-    glue は、自然言語処理（NLP）AIモデルの評価ベンチマーク「GLUE（General Language Understanding Evaluation）」の結果をまとめたデータセットです。\n
-    AI（特にBERTやT5、GPTの基盤となったTransformerなど）のモデルが、様々な言語理解タスクにおいてどれだけのスコア（成績）を収めたかが記録されています。 \n
+    glue は、自然言語処理（NLP）AIモデルの評価ベンチマーク
+    「GLUE（General Language Understanding Evaluation）」の結果をまとめたデータセットです。\n
+    AI（特にBERTやT5、GPTの基盤となったTransformerなど）のモデルが、
+    様々な言語理解タスクにおいてどれだけのスコア（成績）を収めたかが記録されています。 \n
     
     \n\n\n
     以下変数一覧です \n
@@ -1487,7 +1551,7 @@ df = sns.load_dataset('glue')
     #統計量を決める
     statistic_glue = st.selectbox(
         '調べたい統計量を選んでください',
-        ['最大値','最小値','平均値','中央値','合計'],
+        static_list,
         key='glue_statistic'
     )
 
@@ -1507,7 +1571,8 @@ with tab15:
     st.markdown('''
     healthexpは世界主要国における医療費の支出額と、その国の平均寿命の歴史的推移をまとめたデータセットです。
     国の経済的な豊かさ（医療への投資額）が、国民の健康（寿命）にどう結びついているかをマクロ視点で分析するのに適しています。\n
-    このデータセットには、日本、アメリカ、ドイツ、フランス、イギリス、カナダなどの先進国における、1970年から2020年（または2021年）までのデータが記録されています。
+    このデータセットには、日本、アメリカ、ドイツ、フランス、イギリス、カナダなどの先進国における、
+    1970年から2020年（または2021年）までのデータが記録されています。
     
     \n\n\n
     以下変数一覧です \n
@@ -1574,7 +1639,7 @@ df = sns.load_dataset('healthexp')
     #統計量を決める
     statistic_healthexp = st.selectbox(
         '調べたい統計量を選んでください',
-        ['最大値','最小値','平均値','中央値','合計'],
+        static_list,
         key='healthexp_statistic'
     )
 
@@ -1584,7 +1649,8 @@ df = sns.load_dataset('healthexp')
     # グラフと表を表示
     if st.button('統計量とグラフを表示する',key='healthexp_stats_graph_button' ):
         healthexp = sns.load_dataset("healthexp")
-        show_graph_and_table(category_options_healthexp,num_options_healthexp,statistic_healthexp,healthexp,all_columns_healthexp)
+        show_graph_and_table(category_options_healthexp,num_options_healthexp,
+                             statistic_healthexp,healthexp,all_columns_healthexp)
 
     ### カテゴリーごとに散布図を表示
     st.write(" \n \n ")
@@ -1613,6 +1679,20 @@ df = sns.load_dataset('healthexp')
         scatter_bycategory("healthexp",num_options_x_healthexp,num_options_y_healthexp,category_options_healthexp)
 
 
+    ### カテゴリーごとに散布図を表示
+    st.write(" \n \n")
+    st.subheader("カテゴリー変数ごとに時系列グラフを表示")
+
+    healthexp_metric = st.selectbox(
+        "表示する指標を選択してください",
+        options=["Life_Expectancy", "Spending_USD"],
+        format_func=lambda x: "Life_Expectancy" if x == "Life_Expectancy" else "Spending_USD"
+    )
+
+    if st.button('グラフを表示する',key='healthexp_line_graph_by_category_button' ):
+        line_graph_bycategory("healthexp",healthexp_metric)
+
+
 # irisデータ (グラフ追加要検討)
 with tab16:      
     #データの概要を説明
@@ -1620,7 +1700,8 @@ with tab16:
     # 文章を挿入
     st.markdown('''
     iris（アイリス）は、3種類のアヤメ（花）の計測データをまとめたデータセットです。\n
-    このデータセットは、3種類のアヤメ（Setosa, Versicolor, Virginica）について、それぞれ50個体ずつ（合計150行）の「がく（萼）」と「花びら（花弁）」の長さと幅を記録したものです。\n
+    このデータセットは、3種類のアヤメ（Setosa, Versicolor, Virginica）について、
+    それぞれ50個体ずつ（合計150行）の「がく（萼）」と「花びら（花弁）」の長さと幅を記録したものです。\n
     
     
     \n\n\n
@@ -1688,7 +1769,7 @@ df = sns.load_dataset('iris')
     #統計量を決める
     statistic_iris = st.selectbox(
         '調べたい統計量を選んでください',
-        ['最大値','最小値','平均値','中央値','合計'],
+        static_list,
         key='iris_statistic'
     )
 
@@ -1723,8 +1804,12 @@ df = sns.load_dataset('iris')
         key='iris_scatter_category'
     )
 
-    if st.button('グラフを表示する',key='iris_scatter_by_category_button' ):
+    if st.button('カテゴリごとにグラフを分割して表示',key='iris_scatter_by_category_button' ):
         scatter_bycategory("iris",num_options_x_iris,num_options_y_iris,category_options_iris)
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='iris_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("iris",num_options_x_iris,num_options_y_iris,category_options_iris)
+
+    
 
 
 
@@ -1736,7 +1821,8 @@ with tab17:
     # 文章を挿入
     st.markdown('''
     mpgは1970年から1982年までに製造されたさまざまな自動車の燃費（マイル・パー・ガロン）や各種スペックをまとめたデータセットです\n
-    自動車の重量、馬力、排気量などの物理的なスペックが、車の燃費にどのような影響を与えるかを分析・予測するためのデータとして、統計学や機械学習の回帰分析（価格や燃費の予測）の入門用に広く使われています。\n
+    自動車の重量、馬力、排気量などの物理的なスペックが、車の燃費にどのような影響を与えるかを分析・予測するためのデータとして、
+    統計学や機械学習の回帰分析（価格や燃費の予測）の入門用に広く使われています。\n
     
     
     \n\n\n
@@ -1806,11 +1892,12 @@ df = sns.load_dataset('mpg')
     #統計量を決める
     statistic_mgp = st.selectbox(
         '調べたい統計量を選んでください',
-        ['最大値','最小値','平均値','中央値','合計'],
+        static_list,
         key='mgp_statistic'
     )
 
-    all_columns_mgp = ['mpg','cylinders','displacement','horsepower','weight','acceleration','model_year','origin','name']
+    all_columns_mgp = ['mpg','cylinders','displacement','horsepower','weight',
+                       'acceleration','model_year','origin','name']
 
 
     # グラフと表を表示
@@ -1818,6 +1905,7 @@ df = sns.load_dataset('mpg')
         mgp = sns.load_dataset("mpg")
         show_graph_and_table(category_options_mgp,num_options_mgp,statistic_mgp,mgp,all_columns_mgp)
 
+    
     ### カテゴリーごとに散布図を表示
     st.write(" \n \n ")
     st.subheader("カテゴリー変数ごとに散布図を表示")
@@ -1841,8 +1929,11 @@ df = sns.load_dataset('mpg')
         key='mpg_scatter_category'
     )
 
-    if st.button('グラフを表示する',key='mpg_scatter_by_category_button' ):
+    if st.button('カテゴリごとにグラフを分割して表示',key='mpg_scatter_by_category_button' ):
         scatter_bycategory("mpg",num_options_x_mpg,num_options_y_mpg,category_options_mpg)
+
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='mpg_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("mpg",num_options_x_mpg,num_options_y_mpg,category_options_mpg)
 
 
 
@@ -1931,17 +2022,19 @@ df = sns.load_dataset('penguins')
     #統計量を決める
     statistic_penguins = st.selectbox(
         '調べたい統計量を選んでください',
-        ['最大値','最小値','平均値','中央値','合計'],
+        static_list,
         key='penguins_statistic'
     )
 
-    all_columns_penguins = ['species','island','bill_length_mm','bill_depth_mm','flipper_length_mm','body_mass_g','sex']
+    all_columns_penguins = ['species','island','bill_length_mm','bill_depth_mm',
+                            'flipper_length_mm','body_mass_g','sex']
 
 
     # グラフと表を表示
     if st.button('統計量とグラフを表示する',key='penguins_stats_graph_button' ):
         penguins = sns.load_dataset("penguins")
-        show_graph_and_table(category_options_penguins,num_options_penguins,statistic_penguins,penguins,all_columns_penguins)
+        show_graph_and_table(category_options_penguins,num_options_penguins,
+                             statistic_penguins,penguins,all_columns_penguins)
 
 
     ### カテゴリーごとに散布図を表示
@@ -1967,8 +2060,11 @@ df = sns.load_dataset('penguins')
         key='penguins_scatter_category'
     )
 
-    if st.button('グラフを表示する',key='penguins_scatter_by_category_button' ):
+    if st.button('カテゴリごとにグラフを分割して表示',key='penguins_scatter_by_category_button' ):
         scatter_bycategory("penguins",num_options_x_penguins,num_options_y_penguins,category_options_penguins)
+
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='penguins_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("penguins",num_options_x_penguins,num_options_y_penguins,category_options_penguins)
 
 
 # planetsデータ (グラフ要検討)
@@ -2050,7 +2146,7 @@ df = sns.load_dataset('planets')
     #統計量を決める
     statistic_planets = st.selectbox(
         '調べたい統計量を選んでください',
-        ['最大値','最小値','平均値','中央値','合計'],
+        static_list,
         key='planets_statistic'
     )
 
@@ -2060,7 +2156,8 @@ df = sns.load_dataset('planets')
     # グラフと表を表示
     if st.button('統計量とグラフを表示する',key='planets_stats_graph_button' ):
         planets = sns.load_dataset("planets")
-        show_graph_and_table(category_options_planets,num_options_planets,statistic_planets,planets,all_columns_planets)
+        show_graph_and_table(category_options_planets,num_options_planets,
+                             statistic_planets,planets,all_columns_planets)
 
 
     ### カテゴリーごとに散布図を表示
@@ -2086,8 +2183,11 @@ df = sns.load_dataset('planets')
         key='planets_scatter_category'
     )
 
-    if st.button('グラフを表示する',key='planets_scatter_by_category_button' ):
+    if st.button('カテゴリごとにグラフを分割して表示',key='planets_scatter_by_category_button' ):
         scatter_bycategory("planets",num_options_x_planets,num_options_y_planets,category_options_planets)
+
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='planets_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("planets",num_options_x_planets,num_options_y_planets,category_options_planets)
 
 
 # seaiceデータ (グラフ追加要検討)
@@ -2096,9 +2196,10 @@ with tab20:
     st.subheader("データの概要")
     # 文章を挿入
     st.markdown('''
-    seaice（シーアイス）は、北極または地球全体の海氷面積（海に浮かぶ氷の広さ）の長期的な時系列データをまとめたデータセットです。 \n
-
-    地球温暖化や気候変動の影響によって、世界の海氷が時代とともにどのように減少・変化しているかを可視化・分析するための教材としてよく使われます \n
+    seaice（シーアイス）は、北極または地球全体の海氷面積（海に浮かぶ氷の広さ）の
+    長期的な時系列データをまとめたデータセットです。 \n
+    地球温暖化や気候変動の影響によって、世界の海氷が時代とともにどのように減少・変化しているかを
+    可視化・分析するための教材としてよく使われます \n
     
     
     
@@ -2156,7 +2257,8 @@ with tab21:
     st.markdown('''
     taxis（タクシーズ）は、ニューヨーク市（NYC）におけるイエローキャブ（タクシー）およびグリーンキャブの乗車・運行記録データです。\n
 
-    乗車・降車の日時や場所、走行距離といった運行データから、運賃、チップ、支払い方法などの金銭的なデータまで幅広く含まれており、データ分析、売上予測、GIS（地理情報システム）的な可視化、データクレンジングの練習に最適なデータセットです\n
+    乗車・降車の日時や場所、走行距離といった運行データから、運賃、チップ、支払い方法などの金銭的なデータまで幅広く含まれており、
+    データ分析、売上予測、GIS（地理情報システム）的な可視化、データクレンジングの練習に最適なデータセットです\n
 
     
     
@@ -2236,17 +2338,20 @@ df = sns.load_dataset('taxis')
     #統計量を決める
     statistic_taxis = st.selectbox(
         '調べたい統計量を選んでください',
-        ['最大値','最小値','平均値','中央値','合計'],
+        static_list,
         key='taxis_statistic'
     )
 
-    all_columns_taxis = ['pickup','dropoff','passengers','distance','fare','tip','tolls','total','color','payment','pickup_zone','dropoff_zone','pickup_borough','dropoff_borough']
+    all_columns_taxis = ['pickup','dropoff','passengers','distance','fare',
+                         'tip','tolls','total','color','payment','pickup_zone',
+                         'dropoff_zone','pickup_borough','dropoff_borough']
 
 
     # グラフと表を表示
     if st.button('統計量とグラフを表示する',key='taxis_stats_graph_button' ):
         taxis = sns.load_dataset("taxis")
-        show_graph_and_table(category_options_taxis,num_options_taxis,statistic_taxis,taxis,all_columns_taxis)
+        show_graph_and_table(category_options_taxis,num_options_taxis,
+                             statistic_taxis,taxis,all_columns_taxis)
 
     
     ### カテゴリーごとに散布図を表示
@@ -2272,5 +2377,8 @@ df = sns.load_dataset('taxis')
         key='taxis_scatter_category'
     )
 
-    if st.button('グラフを表示する',key='taxis_scatter_by_category_button' ):
+    if st.button('カテゴリごとにグラフを分割して表示',key='taxis_scatter_by_category_button' ):
         scatter_bycategory("taxis",num_options_x_taxis,num_options_y_taxis,category_options_taxis)
+
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='taxis_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("taxis",num_options_x_taxis,num_options_y_taxis,category_options_taxis)

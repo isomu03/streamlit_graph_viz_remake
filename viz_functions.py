@@ -103,7 +103,8 @@ def time_series_graph(dataname,x_column,y_column):
     fig = px.line(
         df,
         x=x_column,
-        y=y_column
+        y=y_column,
+        
         
     )
 
@@ -157,6 +158,27 @@ def scatter_bycategory(data_name,num1,num2,category):
         y=num2, 
         facet_col=category, 
         facet_col_wrap=2,  # 2列の格子状に並べる（4つのグラフが2×2になる）
+        color=category,   # グループごとに色分け
+        template="plotly_white" # すっきりした白背景のテーマ
+    )
+
+    # グラフの見た目を少し調整（マージンやタイトルの配置など）
+    fig.update_layout(
+        height=600,
+        showlegend=False # 色分けしているので凡例は非表示に
+    )
+
+    # 4. Streamlitでグラフを描写
+    st.plotly_chart(fig, use_container_width=True)
+
+
+def scatter_bycategory_onegraph(data_name,num1,num2,category):
+    df = sns.load_dataset(data_name)
+
+    fig = px.scatter(
+        df, 
+        x=num1, 
+        y=num2, 
         color=category,   # グループごとに色分け
         template="plotly_white" # すっきりした白背景のテーマ
     )
@@ -247,4 +269,35 @@ def exercise_graph(category):
     )
 
     # 4. Streamlitでグラフを描写
+    st.plotly_chart(fig, use_container_width=True)
+
+
+
+def line_graph_bycategory(datasource,metric):
+    df = sns.load_dataset(datasource)
+
+
+
+    # 2. グラフにする指標をユーザーが選択できるようにする
+    
+
+    # 3. Plotlyで時系列折れ線グラフを作成
+
+    fig = px.line(
+        df,
+        x="Year",
+        y=metric,
+        color="Country",
+        title=f"国別 {metric} の経年変化",
+        labels={"Year": "年", "Spending_USD": "医療費 (USD)", "Life_Expectancy": "期待寿命 (年)", "Country": "国名"},
+        markers=True # 各データ点にドットを表示して見やすくする
+    )
+
+    # 4. グラフのレイアウト調整
+    fig.update_layout(
+        hovermode="x unified",  # 同じ「年」のデータをホバー時に一括表示
+        xaxis=dict(dtick=5)     # X軸（年）の目盛りを5年刻みにする
+    )
+
+    # 5. Streamlitにグラフを表示
     st.plotly_chart(fig, use_container_width=True)
