@@ -1674,8 +1674,11 @@ df = sns.load_dataset('healthexp')
         key='healthexp_scatter_category'
     )
 
-    if st.button('グラフを表示する',key='healthexp_scatter_by_category_button' ):
+    if st.button('カテゴリごとにグラフを分割して表示',key='healthexp_scatter_by_category_button' ):
         scatter_bycategory("healthexp",num_options_x_healthexp,num_options_y_healthexp,category_options_healthexp)
+
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='healthexp_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("healthexp",num_options_x_healthexp,num_options_y_healthexp,category_options_healthexp)
 
 
     ### カテゴリーごとに散布図を表示
