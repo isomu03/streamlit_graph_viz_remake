@@ -301,3 +301,33 @@ def line_graph_bycategory(datasource,metric):
 
     # 5. Streamlitにグラフを表示
     st.plotly_chart(fig, use_container_width=True)
+
+def line_graph_healthexp(datasource,metric):
+    df_0 = sns.load_dataset(datasource)
+    df = df_0.drop(columns="Country").groupby('Year',as_index=False).mean()
+
+
+
+    # 2. グラフにする指標をユーザーが選択できるようにする
+    
+
+    # 3. Plotlyで時系列折れ線グラフを作成
+
+    fig = px.line(
+        df,
+        x="Year",
+        y=metric,
+        
+        title=f"{metric} の経年変化",
+        labels={"Year": "年", "Spending_USD": "医療費 (USD)", "Life_Expectancy": "期待寿命 (年)"},
+        markers=True # 各データ点にドットを表示して見やすくする
+    )
+
+    # 4. グラフのレイアウト調整
+    fig.update_layout(
+        hovermode="x unified",  # 同じ「年」のデータをホバー時に一括表示
+        xaxis=dict(dtick=5)     # X軸（年）の目盛りを5年刻みにする
+    )
+
+    # 5. Streamlitにグラフを表示
+    st.plotly_chart(fig, use_container_width=True)

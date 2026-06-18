@@ -5,7 +5,7 @@ import numpy as np
 import seaborn as sns
 import plotly.express as px
 # 内部モジュール
-from viz_functions import make_columns,show_graph,show_graph_and_table,time_series_graph,scatter_bycategory,scatters,flight_line_chart,exercise_graph,line_graph_bycategory,scatter_bycategory_onegraph
+from viz_functions import make_columns,show_graph,show_graph_and_table,time_series_graph,scatter_bycategory,scatters,flight_line_chart,exercise_graph,line_graph_bycategory,scatter_bycategory_onegraph,line_graph_healthexp
 
 
 # ヘッダー
@@ -1681,14 +1681,30 @@ df = sns.load_dataset('healthexp')
         scatter_bycategory_onegraph("healthexp",num_options_x_healthexp,num_options_y_healthexp,category_options_healthexp)
 
 
-    ### カテゴリーごとに散布図を表示
+    # 時系列折れ線グラフを表示
     st.write(" \n \n")
-    st.subheader("カテゴリー変数ごとに時系列グラフを表示")
+    st.subheader("時系列グラフを表示")
+
+    healthexp_line_metric = st.selectbox(
+        "表示する指標を選択してください",
+        options=["Life_Expectancy", "Spending_USD"],
+        format_func=lambda x: "Life_Expectancy" if x == "Life_Expectancy" else "Spending_USD",
+        key='healthexp_line_graph_metric'
+    )
+
+    if st.button('グラフを表示する',key='healthexp_line_graph_button' ):
+        line_graph_healthexp("healthexp",healthexp_line_metric)
+    
+    
+    ### カテゴリーごとに時系列の折れ線グラフを表示
+    st.write(" \n \n")
+    st.subheader("国別に時系列グラフを表示")
 
     healthexp_metric = st.selectbox(
         "表示する指標を選択してください",
         options=["Life_Expectancy", "Spending_USD"],
-        format_func=lambda x: "Life_Expectancy" if x == "Life_Expectancy" else "Spending_USD"
+        format_func=lambda x: "Life_Expectancy" if x == "Life_Expectancy" else "Spending_USD",
+        key='healthexp_line_graph_by_category_metric'
     )
 
     if st.button('グラフを表示する',key='healthexp_line_graph_by_category_button' ):
