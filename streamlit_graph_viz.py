@@ -5,8 +5,7 @@ import numpy as np
 import seaborn as sns
 import plotly.express as px
 # 内部モジュール
-from viz_functions import make_columns,show_graph,show_graph_and_table,time_series_graph,scatter_bycategory,scatters
-from viz_functions import flight_line_chart,exercise_graph,line_graph_bycategory,scatter_bycategory_onegraph
+from viz_functions import make_columns,show_graph,show_graph_and_table,time_series_graph,scatter_bycategory,scatters,flight_line_chart,exercise_graph,line_graph_bycategory,scatter_bycategory_onegraph
 
 
 # ヘッダー
