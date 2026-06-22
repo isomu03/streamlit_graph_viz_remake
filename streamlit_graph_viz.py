@@ -15,30 +15,37 @@ st.write("seabornで提供されているデータの内容をグラフで確認
 
 st.link_button("Seaborn提供データ詳細ページ","https://github.com/mwaskom/seaborn-data/tree/master")
 st.write('\n')
-# タブを作る
-tab1,tab2,tab3,tab4,tab5,tab6,tab7,tab8,tab9,tab10,tab11,tab12,tab13,tab14,tab15,tab16,tab17,tab18,tab19,tab20,tab21= st.tabs([
-                                    "Tips",
-                                    "Titanic",
-                                    "Anagrams",
-                                    "Anscombe",
-                                    "Attention",
-                                    "Car_crashes",
-                                    "Diamonds",
-                                    "Dots",
-                                    "Dowjones",
-                                    "Exercise",
-                                    "Flights",
-                                    "fMRI",
-                                    "Geyser",
-                                    "Glue",
-                                    "Healthexp",
-                                    "Iris",
-                                    "mpg",
-                                    "Penguins",
-                                    "Planets",
-                                    "Seaice",
-                                    "Taxis"
-                                    ])
+
+
+
+# サイドバーを作る
+page = st.sidebar.radio(
+    ":blue[**データセットを選択してください**]",
+    [
+    "Tips",
+    "Titanic",
+    "Anagrams",
+    "Anscombe",
+    "Attention",
+    "Car_crashes",
+    "Diamonds",
+    "Dots",
+    "Dowjones",
+    "Exercise",
+    "Flights",
+    "fMRI",
+    "Geyser",
+    "Glue",
+    "Healthexp",
+    "Iris",
+    "mpg",
+    "Penguins",
+    "Planets",
+    "Seaice",
+    "Taxis"
+    ]
+)
+
 
 # カテゴリごとにグラフと統計量を表示するための統計量リスト
 static_list = ['最大値','最小値','平均値','中央値','合計']
@@ -47,8 +54,13 @@ static_list = ['最大値','最小値','平均値','中央値','合計']
 
 
 # Tipsデータタブ
-with tab1:      
-    #データの概要を説明
+if page == "Tips":      
+    ### データ名表示 
+    st.subheader("データセット名：Tips")
+    st.divider() 
+    
+
+    ### データの概要を説明
     st.subheader("データの概要")
     # 文章を挿入
     st.write('''
@@ -163,8 +175,12 @@ df = sns.load_dataset('tips')
 
 
 # タイタニックデータタブ
-with tab2:
-    # データの概要
+elif page == "Titanic":
+    ### データ名表示 
+    st.subheader("データセット名：Titanic")
+    st.divider() 
+
+    ### データの概要
     st.subheader("データの概要")
     st.write('''
     タイタニック号の沈没事故で生存したかどうか、以下の変数で分類したデータになります。 \n
@@ -293,8 +309,12 @@ df = sns.load_dataset('titanic')
 
 
 # Anagramデータタブ
-with tab3:      
-    #データの概要を説明
+elif page == "Anagrams":
+    ### データ名表示 
+    st.subheader("データセット名：Anagrams")
+    st.divider() 
+
+    ### データの概要を説明
     st.subheader("データの概要")
     # 文章を挿入
     st.write('''
@@ -408,7 +428,11 @@ df = sns.load_dataset('anagrams')
 
 
 # anscombeデータタブ
-with tab4:      
+elif page == "Anscombe":
+    ### データ名表示 
+    st.subheader("データセット名：Anscombe")
+    st.divider()
+
     #データの概要を説明
     st.subheader("データの概要")
     # 文章を挿入
@@ -532,8 +556,12 @@ df = sns.load_dataset('anscombe')
 
 
 # attentionデータタブ
-with tab5:      
-    #データの概要を説明
+elif page == "Attention":
+    ### データ名表示 
+    st.subheader("データセット名：Attention")
+    st.divider()
+
+    ### データの概要を説明
     st.subheader("データの概要")
     # 文章を挿入
     st.markdown('''
@@ -654,8 +682,12 @@ df = sns.load_dataset('attention')
                                     num_options_y_attention,category_options_attention)
 
 # car crashesデータ
-with tab6:      
-    #データの概要を説明
+elif page == "Car_crashes":   
+    ### データ名表示 
+    st.subheader("データセット名：Car_crashes")
+    st.divider()
+
+    ### データの概要を説明
     st.subheader("データの概要")
     # 文章を挿入
     st.markdown('''
@@ -770,8 +802,12 @@ df = sns.load_dataset('car_crashes')
 
 
 # Diamondsデータ
-with tab7:      
-    #データの概要を説明
+elif page == "Diamonds": 
+    ### データ名表示 
+    st.subheader("データセット名：Diamonds")
+    st.divider()
+
+    ### データの概要を説明
     st.subheader("データの概要")
     # 文章を挿入
     st.markdown('''
@@ -902,7 +938,11 @@ df = sns.load_dataset('diamonds')
 
 
 # Dotsデータ
-with tab8:      
+elif page == "Dots": 
+    ### データ名表示 
+    st.subheader("データセット名：Dots")
+    st.divider()
+
     #データの概要を説明
     st.subheader("データの概要")
     # 文章を挿入
@@ -1031,8 +1071,12 @@ df = sns.load_dataset('dots')
 
 
 # Dowjonesデータ (グラフの機能要修正)
-with tab9:      
-    #データの概要を説明
+elif page == "Dowjones": 
+    ### データ名表示 
+    st.subheader("データセット名：Dowjones")
+    st.divider()
+
+    ### データの概要を説明
     st.subheader("データの概要")
     # 文章を挿入
     st.markdown('''
@@ -1086,8 +1130,12 @@ df = sns.load_dataset('dowjones')
 
 
 # Exerciseデータ
-with tab10:      
-    #データの概要を説明
+elif page == "Exercise":  
+    ### データ名表示 
+    st.subheader("データセット名：Exercise")
+    st.divider()
+
+    ### データの概要を説明
     st.subheader("データの概要")
     # 文章を挿入
     st.markdown('''
@@ -1195,7 +1243,11 @@ df = sns.load_dataset('exercise')
         scatter_bycategory_onegraph("exercise",'time','pulse',category_options_exercise)
 
 # Flightsデータ(グラフの機能要修正)
-with tab11:      
+elif page == "Flights":  
+    ### データ名表示 
+    st.subheader("データセット名：Flights")
+    st.divider()
+
     ### データの概要を説明
     st.subheader("データの概要")
     # 文章を挿入
@@ -1285,8 +1337,12 @@ df = sns.load_dataset('flights')
 
 
 # fMRIデータ (他のグラフも追加)
-with tab12:      
-    #データの概要を説明
+elif page == "fMRI":  
+    ### データ名表示 
+    st.subheader("データセット名：fMRI")
+    st.divider()
+
+    ### データの概要を説明
     st.subheader("データの概要")
     # 文章を挿入
     st.markdown('''
@@ -1413,8 +1469,12 @@ df = sns.load_dataset('fmri')
 
 
 # geyserデータ 
-with tab13:      
-    #データの概要を説明
+elif page == "Geyser":   
+    ### データ名表示 
+    st.subheader("データセット名：Geyser")
+    st.divider()
+
+    ### データの概要を説明
     st.subheader("データの概要")
     # 文章を挿入
     st.markdown('''
@@ -1536,8 +1596,12 @@ df = sns.load_dataset('geyser')
 
 
 # glueデータ (グラフ追加要検討)
-with tab14:      
-    #データの概要を説明
+elif page == "Glue": 
+    ### データ名表示 
+    st.subheader("データセット名：Glue")
+    st.divider()
+
+    ###データの概要を説明
     st.subheader("データの概要")
     # 文章を挿入
     st.markdown('''
@@ -1632,8 +1696,12 @@ df = sns.load_dataset('glue')
                              statistic_glue,glue,all_columns_glue)
 
 # healthexpデータ (グラフ追加要検討)
-with tab15:      
-    #データの概要を説明
+elif page == "Healthexp": 
+    ### データ名表示 
+    st.subheader("データセット名：Healthexp")
+    st.divider()
+
+    ### データの概要を説明
     st.subheader("データの概要")
     # 文章を挿入
     st.markdown('''
@@ -1787,8 +1855,12 @@ df = sns.load_dataset('healthexp')
 
 
 # irisデータ (グラフ追加要検討)
-with tab16:      
-    #データの概要を説明
+elif page == "Iris":   
+    ### データ名表示 
+    st.subheader("データセット名：Iris")
+    st.divider()
+
+    ### データの概要を説明
     st.subheader("データの概要")
     # 文章を挿入
     st.markdown('''
@@ -1915,7 +1987,11 @@ df = sns.load_dataset('iris')
 
 
 # mgpデータ (グラフ追加要検討)
-with tab17:      
+elif page == "mpg": 
+    ### データ名表示 
+    st.subheader("データセット名：mpg")
+    st.divider()
+
     #データの概要を説明
     st.subheader("データの概要")
     # 文章を挿入
@@ -2047,8 +2123,12 @@ df = sns.load_dataset('mpg')
 
 
 # penguinsデータ (グラフ追加要検討)
-with tab18:      
-    #データの概要を説明
+elif page == "Penguins": 
+    ### データ名表示 
+    st.subheader("データセット名：Penguins")
+    st.divider()
+
+    ### データの概要を説明
     st.subheader("データの概要")
     # 文章を挿入
     st.markdown('''
@@ -2183,8 +2263,12 @@ df = sns.load_dataset('penguins')
 
 
 # planetsデータ (グラフ要検討)
-with tab19:      
-    #データの概要を説明
+elif page == "Planets": 
+    ### データ名表示 
+    st.subheader("データセット名：Planets")
+    st.divider()
+
+    ### データの概要を説明
     st.subheader("データの概要")
     # 文章を挿入
     st.markdown('''
@@ -2312,8 +2396,12 @@ df = sns.load_dataset('planets')
 
 
 # seaiceデータ
-with tab20:      
-    #データの概要を説明
+elif page == "Seaice": 
+    ### データ名表示 
+    st.subheader("データセット名：Seaice")
+    st.divider()
+
+    ### データの概要を説明
     st.subheader("データの概要")
     # 文章を挿入
     st.markdown('''
@@ -2371,8 +2459,12 @@ df = sns.load_dataset('seaice')
         time_series_graph("seaice","Date","Extent")
 
 # taxisデータ (グラフ追加要検討)
-with tab21:      
-    #データの概要を説明
+elif page == "Taxis":    
+    ### データ名表示 
+    st.subheader("データセット名：Taxis")
+    st.divider()
+
+    ### データの概要を説明
     st.subheader("データの概要")
     # 文章を挿入
     st.markdown('''
