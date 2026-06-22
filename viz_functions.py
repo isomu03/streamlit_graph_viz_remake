@@ -186,7 +186,7 @@ def scatter_bycategory_onegraph(data_name,num1,num2,category):
     # グラフの見た目を少し調整（マージンやタイトルの配置など）
     fig.update_layout(
         height=600,
-        showlegend=False # 色分けしているので凡例は非表示に
+        showlegend=True
     )
 
     # 4. Streamlitでグラフを描写

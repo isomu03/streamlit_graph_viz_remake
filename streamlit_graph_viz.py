@@ -44,6 +44,8 @@ tab1,tab2,tab3,tab4,tab5,tab6,tab7,tab8,tab9,tab10,tab11,tab12,tab13,tab14,tab15
 static_list = ['最大値','最小値','平均値','中央値','合計']
 
 
+
+
 # Tipsデータタブ
 with tab1:      
     #データの概要を説明
@@ -125,18 +127,20 @@ df = sns.load_dataset('tips')
 
 
     ### カテゴリーごとに散布図を表示
+    scatter_xy_list_tips = ['total_bill','tip','size']
+
     st.write(" \n \n ")
     st.subheader("カテゴリー変数ごとに散布図を表示")
     #x軸指標を選択
     num_options_x_tips = st.selectbox(
         '横軸に表示する数値尺度を選択してください',
-        ['total_bill','tip','size'],
+        scatter_xy_list_tips,
         key='tips_scatter_x'
     )
     #y軸指標を選択
     num_options_y_tips = st.selectbox(
         '縦軸に表示する数値尺度を選択してください',
-        ['total_bill','tip','size'],
+        scatter_xy_list_tips,
         key='tips_scatter_y'
     )
 
@@ -147,11 +151,15 @@ df = sns.load_dataset('tips')
         key='tips_scatter_category'
     )
 
-    if st.button('カテゴリごとにグラフを分割して表示',key='tips_scatter_by_category_button' ):
-        scatter_bycategory("tips",num_options_x_tips,num_options_y_tips,category_options_tips)
+    if st.button('カテゴリごとにグラフを分割して表示',
+                 key='tips_scatter_by_category_button' ):
+        scatter_bycategory("tips",num_options_x_tips,
+                           num_options_y_tips,category_options_tips)
 
-    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='tips_scatter_by_category_button_onegrapgh' ):
-        scatter_bycategory_onegraph("tips",num_options_x_tips,num_options_y_tips,category_options_tips)
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',
+                 key='tips_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("tips",num_options_x_tips,
+                                    num_options_y_tips,category_options_tips)
 
 
 # タイタニックデータタブ
@@ -222,7 +230,8 @@ df = sns.load_dataset('titanic')
     #カテゴリーを選択
     category_options_taitanic = st.multiselect(
         '調べたいカテゴリ変数を選んでください',
-        ['pclass','sex','embarked','class','adult_male','deck','embark_town','alive','alone','who'],
+        ['pclass','sex','embarked','class','adult_male',
+         'deck','embark_town','alive','alone','who'],
         key='titanic_category_option' 
     )
 
@@ -246,33 +255,40 @@ df = sns.load_dataset('titanic')
                              statistic_titanic,titanic,all_columns_titanic)
 
     ### カテゴリーごとに散布図を表示
+    scatter_xy_list_titanic = ['survived','age','parch','fare','sibsp']
+
     st.write(" \n \n ")
     st.subheader("カテゴリー変数ごとに散布図を表示")
     #x軸指標を選択
     num_options_x_titanic = st.selectbox(
         '横軸に表示する数値尺度を選択してください',
-        ['survived','age','parch','fare','sibsp'],
+        scatter_xy_list_titanic,
         key='titanic_scatter_x'
     )
     #y軸指標を選択
     num_options_y_titanic = st.selectbox(
         '縦軸に表示する数値尺度を選択してください',
-        ['survived','age','parch','fare','sibsp'],
+        scatter_xy_list_titanic,
         key='titanic_scatter_y'
     )
 
     #カテゴリーを選択
     category_options_titanic = st.selectbox(
         '調べたいカテゴリ変数を選んでください',
-        ['pclass','sex','embarked','class','adult_male','deck','embark_town','alive','alone','who'],
+        ['pclass','sex','embarked','class','adult_male',
+         'deck','embark_town','alive','alone','who'],
         key='titanic_scatter_category'
     )
 
-    if st.button('カテゴリごとにグラフを分割して表示',key='titanic_scatter_by_category_button' ):
-        scatter_bycategory("titanic",num_options_x_titanic,num_options_y_titanic,category_options_titanic)
+    if st.button('カテゴリごとにグラフを分割して表示',
+                 key='titanic_scatter_by_category_button' ):
+        scatter_bycategory("titanic",num_options_x_titanic,
+                           num_options_y_titanic,category_options_titanic)
 
-    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='titanic_scatter_by_category_button_onegrapgh' ):
-        scatter_bycategory_onegraph("titanic",num_options_x_titanic,num_options_y_titanic,category_options_titanic)
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',
+                key='titanic_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("titanic",num_options_x_titanic,
+                                    num_options_y_titanic,category_options_titanic)
 
 
 
@@ -356,18 +372,20 @@ df = sns.load_dataset('anagrams')
                              statistic_anagram,anagram,all_columns_anagram)
 
     ### カテゴリーごとに散布図を表示
+    scatter_xy_list_anagram = ['num1','num2','num3']
+
     st.write(" \n \n ")
     st.subheader("カテゴリー変数ごとに散布図を表示")
     #x軸指標を選択
     num_options_x_anagram = st.selectbox(
         '横軸に表示する数値尺度を選択してください',
-        ['num1','num2','num3'],
+        scatter_xy_list_anagram,
         key='anagram_scatter_x'
     )
     #y軸指標を選択
     num_options_y_anagram = st.selectbox(
         '縦軸に表示する数値尺度を選択してください',
-        ['num1','num2','num3'],
+        scatter_xy_list_anagram,
         key='anagram_scatter_y'
     )
 
@@ -378,11 +396,15 @@ df = sns.load_dataset('anagrams')
         key='anagram_scatter_category'
     )
 
-    if st.button('カテゴリごとにグラフを分割して表示',key='anagram_scatter_by_category_button' ):
-        scatter_bycategory("anagrams",num_options_x_anagram,num_options_y_anagram,category_options_anagram)
+    if st.button('カテゴリごとにグラフを分割して表示',
+                 key='anagram_scatter_by_category_button' ):
+        scatter_bycategory("anagrams",num_options_x_anagram,
+                           num_options_y_anagram,category_options_anagram)
 
-    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='anagram_scatter_by_category_button_onegrapgh' ):
-        scatter_bycategory_onegraph("anagrams",num_options_x_anagram,num_options_y_anagram,category_options_anagram)
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',
+                 key='anagram_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("anagrams",num_options_x_anagram,
+                                    num_options_y_anagram,category_options_anagram)
 
 
 # anscombeデータタブ
@@ -474,18 +496,20 @@ df = sns.load_dataset('anscombe')
 
 
     ### カテゴリーごとに散布図を表示
+    scatter_xy_list_ansconbe = ['x','y']
+
     st.write(" \n \n ")
     st.subheader("カテゴリー変数ごとに散布図を表示")
     #x軸指標を選択
     num_options_x_ansconbe = st.selectbox(
         '横軸に表示する数値尺度を選択してください',
-        ['x','y'],
+        scatter_xy_list_ansconbe,
         key='ansconbe_scatter_x'
     )
     #y軸指標を選択
     num_options_y_ansconbe = st.selectbox(
         '縦軸に表示する数値尺度を選択してください',
-        ['x','y'],
+        scatter_xy_list_ansconbe,
         key='ansconbe_scatter_y'
     )
 
@@ -496,11 +520,15 @@ df = sns.load_dataset('anscombe')
         key='ansconbe_scatter_category'
     )
 
-    if st.button('カテゴリごとにグラフを分割して表示',key='ansconbe_scatter_by_category_button' ):
-        scatter_bycategory("anscombe",num_options_x_ansconbe,num_options_y_ansconbe,category_options_ansconbe)
+    if st.button('カテゴリごとにグラフを分割して表示',
+                 key='ansconbe_scatter_by_category_button' ):
+        scatter_bycategory("anscombe",num_options_x_ansconbe,
+                           num_options_y_ansconbe,category_options_ansconbe)
 
-    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='anscombe_scatter_by_category_button_onegrapgh' ):
-        scatter_bycategory_onegraph("anscombe",num_options_x_ansconbe,num_options_y_ansconbe,category_options_ansconbe)
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',
+                 key='anscombe_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("anscombe",num_options_x_ansconbe,
+                                    num_options_y_ansconbe,category_options_ansconbe)
 
 
 # attentionデータタブ
@@ -591,18 +619,20 @@ df = sns.load_dataset('attention')
 
 
     ### カテゴリーごとに散布図を表示
+    scatter_xy_list_attention = ['solutions','score']
+
     st.write(" \n \n ")
     st.subheader("カテゴリー変数ごとに散布図を表示")
     #x軸指標を選択
     num_options_x_attention = st.selectbox(
         '横軸に表示する数値尺度を選択してください',
-        ['solutions','score'],
+        scatter_xy_list_attention,
         key='attention_scatter_x'
     )
     #y軸指標を選択
     num_options_y_attention = st.selectbox(
         '縦軸に表示する数値尺度を選択してください',
-        ['solutions','score'],
+        scatter_xy_list_attention,
         key='attention_scatter_y'
     )
 
@@ -613,11 +643,15 @@ df = sns.load_dataset('attention')
         key='attention_scatter_category'
     )
 
-    if st.button('カテゴリごとにグラフを分割して表示',key='attention_scatter_by_category_button' ):
-        scatter_bycategory("attention",num_options_x_attention,num_options_y_attention,category_options_attention)
+    if st.button('カテゴリごとにグラフを分割して表示',
+                 key='attention_scatter_by_category_button' ):
+        scatter_bycategory("attention",num_options_x_attention,
+                           num_options_y_attention,category_options_attention)
 
-    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='attention_scatter_by_category_button_onegrapgh' ):
-        scatter_bycategory_onegraph("attention",num_options_x_attention,num_options_y_attention,category_options_attention)
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',
+                 key='attention_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("attention",num_options_x_attention,
+                                    num_options_y_attention,category_options_attention)
 
 # car crashesデータ
 with tab6:      
@@ -709,18 +743,21 @@ df = sns.load_dataset('car_crashes')
                              statistic_car_crashes,car_crashes,all_columns_car_crashes)
 
     ### カテゴリーごとに散布図を表示
+    scatter_xy_list_car_crash = ['total','speeding','alcohol','not_distracted',
+                                 'no_previous','ins_premium','ins_losses']
+
     st.write(" \n \n ")
     st.subheader("散布図を表示")
     #x軸指標を選択
     num_options_x_car_crashes = st.selectbox(
         '横軸に表示する数値尺度を選択してください',
-        ['total','speeding','alcohol','not_distracted','no_previous','ins_premium','ins_losses'],
+        scatter_xy_list_car_crash,
         key='car_crashes_scatter_x'
     )
     #y軸指標を選択
     num_options_y_car_crashes = st.selectbox(
         '縦軸に表示する数値尺度を選択してください',
-        ['total','speeding','alcohol','not_distracted','no_previous','ins_premium','ins_losses'],
+        scatter_xy_list_car_crash,
         key='car_crashes_scatter_y'
     )
 
@@ -738,8 +775,10 @@ with tab7:
     st.subheader("データの概要")
     # 文章を挿入
     st.markdown('''
-    このデータセットは約54,000個のダイヤモンドの価格や品質、サイズに関するデータをまとめたものです。\n
-    ダイヤモンドの価値を決める「4C」（Carat, Cut, Color, Clarity）に加えて、実測サイズや価格が含まれています。 \n
+    このデータセットは約54,000個のダイヤモンドの価格や品質、
+    サイズに関するデータをまとめたものです。\n
+    ダイヤモンドの価値を決める「4C」（Carat, Cut, Color, Clarity）に加えて、
+    実測サイズや価格が含まれています。 \n
     \n\n\n
     以下変数一覧です \n
     ・carat:カラット。ダイヤモンドの重さ(1カラット=0.2グラム) \n
@@ -825,18 +864,20 @@ df = sns.load_dataset('diamonds')
 
 
     ### カテゴリーごとに散布図を表示
+    scatter_xy_list_diamonds = ['carat','depth','price','table','x','y','z']
+
     st.write(" \n \n ")
     st.subheader("カテゴリー変数ごとに散布図を表示")
     #x軸指標を選択
     num_options_x_diamonds = st.selectbox(
         '横軸に表示する数値尺度を選択してください',
-        ['carat','depth','price','table','x','y','z'],
+        scatter_xy_list_diamonds,
         key='diamonds_scatter_x'
     )
     #y軸指標を選択
     num_options_y_diamonds = st.selectbox(
         '縦軸に表示する数値尺度を選択してください',
-        ['carat','depth','price','table','x','y','z'],
+        scatter_xy_list_diamonds,
         key='diamonds_scatter_y'
     )
 
@@ -847,11 +888,15 @@ df = sns.load_dataset('diamonds')
         key='diamonds_scatter_category'
     )
 
-    if st.button('カテゴリごとにグラフを分割して表示',key='diamonds_scatter_by_category_button' ):
-        scatter_bycategory("diamonds",num_options_x_diamonds,num_options_y_diamonds,category_options_diamonds)
+    if st.button('カテゴリごとにグラフを分割して表示',
+                 key='diamonds_scatter_by_category_button' ):
+        scatter_bycategory("diamonds",num_options_x_diamonds,
+                           num_options_y_diamonds,category_options_diamonds)
 
-    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='diamonds_scatter_by_category_button_onegrapgh' ):
-        scatter_bycategory_onegraph("diamonds",num_options_x_diamonds,num_options_y_diamonds,category_options_diamonds)
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',
+                 key='diamonds_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("diamonds",num_options_x_diamonds,
+                                    num_options_y_diamonds,category_options_diamonds)
 
 
 
@@ -949,18 +994,20 @@ df = sns.load_dataset('dots')
 
 
     ### カテゴリーごとに散布図を表示
+    scatter_xy_list_dots = ['time','coherence','firing_rate']
+
     st.write(" \n \n ")
     st.subheader("カテゴリー変数ごとに散布図を表示")
     #x軸指標を選択
     num_options_x_dots = st.selectbox(
         '横軸に表示する数値尺度を選択してください',
-        ['time','coherence','firing_rate'],
+        scatter_xy_list_dots,
         key='dots_scatter_x'
     )
     #y軸指標を選択
     num_options_y_dots = st.selectbox(
         '縦軸に表示する数値尺度を選択してください',
-        ['time','coherence','firing_rate'],
+        scatter_xy_list_dots,
         key='dots_scatter_y'
     )
 
@@ -971,11 +1018,15 @@ df = sns.load_dataset('dots')
         key='dots_scatter_category'
     )
 
-    if st.button('カテゴリごとにグラフを分割して表示',key='dots_scatter_by_category_button' ):
-        scatter_bycategory("dots",num_options_x_dots,num_options_y_dots,category_options_dots)
+    if st.button('カテゴリごとにグラフを分割して表示',
+                 key='dots_scatter_by_category_button' ):
+        scatter_bycategory("dots",num_options_x_dots,
+                           num_options_y_dots,category_options_dots)
     
-    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='dots_scatter_by_category_button_onegrapgh' ):
-        scatter_bycategory_onegraph("dots",num_options_x_dots,num_options_y_dots,category_options_dots)
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',
+                 key='dots_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("dots",num_options_x_dots,
+                                    num_options_y_dots,category_options_dots)
 
 
 
@@ -1135,15 +1186,17 @@ df = sns.load_dataset('exercise')
         key='exercise_scatter_category'
     )
 
-    if st.button('カテゴリごとにグラフを分割して表示',key='exercise_scatter_by_category_button' ):
+    if st.button('カテゴリごとにグラフを分割して表示',
+                 key='exercise_scatter_by_category_button' ):
         exercise_graph(category_options_exercise)
     
-    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='exercise_scatter_by_category_button_onegrapgh' ):
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',
+                 key='exercise_scatter_by_category_button_onegrapgh' ):
         scatter_bycategory_onegraph("exercise",'time','pulse',category_options_exercise)
 
 # Flightsデータ(グラフの機能要修正)
 with tab11:      
-    #データの概要を説明
+    ### データの概要を説明
     st.subheader("データの概要")
     # 文章を挿入
     st.markdown('''
@@ -1167,7 +1220,7 @@ with tab11:
     st.write("seaborn flightsデータ")
     
 
-    # データを表示
+    ### データを表示
     if st.button('データを表示する',key='flights_button' ):
         flights = sns.load_dataset("flights")
         st.dataframe(flights)
@@ -1319,22 +1372,25 @@ df = sns.load_dataset('fmri')
     # グラフと表を表示
     if st.button('統計量とグラフを表示する',key='fmri_stats_graph_button' ):
         fmri = sns.load_dataset("fmri")
-        show_graph_and_table(category_options_fmri,num_options_fmri,statistic_fmri,fmri,all_columns_fmri)
+        show_graph_and_table(category_options_fmri,num_options_fmri,
+                             statistic_fmri,fmri,all_columns_fmri)
 
 
     ### カテゴリーごとに散布図を表示
+    scatter_xy_list_fmri = ['timepoint','signal']
+
     st.write(" \n \n ")
     st.subheader("カテゴリー変数ごとに散布図を表示")
     #x軸指標を選択
     num_options_x_fmri = st.selectbox(
         '横軸に表示する数値尺度を選択してください',
-        ['timepoint','signal'],
+        scatter_xy_list_fmri,
         key='fmri_scatter_x'
     )
     #y軸指標を選択
     num_options_y_fmri = st.selectbox(
         '縦軸に表示する数値尺度を選択してください',
-        ['timepoint','signal'],
+        scatter_xy_list_fmri,
         key='fmri_scatter_y'
     )
 
@@ -1345,11 +1401,15 @@ df = sns.load_dataset('fmri')
         key='fmri_scatter_category'
     )
 
-    if st.button('カテゴリごとにグラフを分割して表示',key='fmri_scatter_by_category_button' ):
-        scatter_bycategory("fmri",num_options_x_fmri,num_options_y_fmri,category_options_fmri)
+    if st.button('カテゴリごとにグラフを分割して表示',
+                 key='fmri_scatter_by_category_button' ):
+        scatter_bycategory("fmri",num_options_x_fmri,
+                           num_options_y_fmri,category_options_fmri)
 
-    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='fmri_scatter_by_category_button_onegrapgh' ):
-        scatter_bycategory_onegraph("fmri",num_options_x_fmri,num_options_y_fmri,category_options_fmri)
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',
+                 key='fmri_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("fmri",num_options_x_fmri,
+                                    num_options_y_fmri,category_options_fmri)
 
 
 # geyserデータ 
@@ -1439,18 +1499,20 @@ df = sns.load_dataset('geyser')
 
 
     ### カテゴリーごとに散布図を表示
+    scatter_xy_list_geyser = ['duration','waiting']
+
     st.write(" \n \n ")
     st.subheader("カテゴリー変数ごとに散布図を表示")
     #x軸指標を選択
     num_options_x_geyser = st.selectbox(
         '横軸に表示する数値尺度を選択してください',
-        ['duration','waiting'],
+        scatter_xy_list_geyser,
         key='geyser_scatter_x'
     )
     #y軸指標を選択
     num_options_y_geyser = st.selectbox(
         '縦軸に表示する数値尺度を選択してください',
-        ['duration','waiting'],
+        scatter_xy_list_geyser,
         key='geyser_scatter_y'
     )
 
@@ -1461,11 +1523,15 @@ df = sns.load_dataset('geyser')
         key='geyser_scatter_category'
     )
 
-    if st.button('カテゴリごとにグラフを分割して表示',key='geyser_scatter_by_category_button' ):
-        scatter_bycategory("geyser",num_options_x_geyser,num_options_y_geyser,category_options_geyser)
+    if st.button('カテゴリごとにグラフを分割して表示',
+                 key='geyser_scatter_by_category_button' ):
+        scatter_bycategory("geyser",num_options_x_geyser,
+                           num_options_y_geyser,category_options_geyser)
 
-    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='geyser_scatter_by_category_button_onegrapgh' ):
-        scatter_bycategory_onegraph("geyser",num_options_x_geyser,num_options_y_geyser,category_options_geyser)
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',
+                 key='geyser_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("geyser",num_options_x_geyser,
+                                    num_options_y_geyser,category_options_geyser)
 
 
 
@@ -1558,9 +1624,12 @@ df = sns.load_dataset('glue')
 
 
     # グラフと表を表示
-    if st.button('統計量とグラフを表示する',key='glue_stats_graph_button' ):
+    if st.button('統計量とグラフを表示する',
+                 key='glue_stats_graph_button' ):
+        
         glue = sns.load_dataset("glue")
-        show_graph_and_table(category_options_glue,num_options_glue,statistic_glue,glue,all_columns_glue)
+        show_graph_and_table(category_options_glue,num_options_glue,
+                             statistic_glue,glue,all_columns_glue)
 
 # healthexpデータ (グラフ追加要検討)
 with tab15:      
@@ -1652,18 +1721,20 @@ df = sns.load_dataset('healthexp')
                              statistic_healthexp,healthexp,all_columns_healthexp)
 
     ### カテゴリーごとに散布図を表示
+    scatter_xy_list_healthexp = ['Spending_USD','Life_Expectancy']
+
     st.write(" \n \n ")
     st.subheader("カテゴリー変数ごとに散布図を表示")
     #x軸指標を選択
     num_options_x_healthexp = st.selectbox(
         '横軸に表示する数値尺度を選択してください',
-        ['Spending_USD','Life_Expectancy'],
+        scatter_xy_list_healthexp,
         key='healthexp_scatter_x'
     )
     #y軸指標を選択
     num_options_y_healthexp = st.selectbox(
         '縦軸に表示する数値尺度を選択してください',
-        ['Spending_USD','Life_Expectancy'],
+        scatter_xy_list_healthexp,
         key='healthexp_scatter_y'
     )
 
@@ -1674,11 +1745,15 @@ df = sns.load_dataset('healthexp')
         key='healthexp_scatter_category'
     )
 
-    if st.button('カテゴリごとにグラフを分割して表示',key='healthexp_scatter_by_category_button' ):
-        scatter_bycategory("healthexp",num_options_x_healthexp,num_options_y_healthexp,category_options_healthexp)
+    if st.button('カテゴリごとにグラフを分割して表示',
+                 key='healthexp_scatter_by_category_button' ):
+        scatter_bycategory("healthexp",num_options_x_healthexp,
+                           num_options_y_healthexp,category_options_healthexp)
 
-    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='healthexp_scatter_by_category_button_onegrapgh' ):
-        scatter_bycategory_onegraph("healthexp",num_options_x_healthexp,num_options_y_healthexp,category_options_healthexp)
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',
+                 key='healthexp_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("healthexp",num_options_x_healthexp,
+                                    num_options_y_healthexp,category_options_healthexp)
 
 
     # 時系列折れ線グラフを表示
@@ -1797,21 +1872,24 @@ df = sns.load_dataset('iris')
     # グラフと表を表示
     if st.button('統計量とグラフを表示する',key='iris_stats_graph_button' ):
         iris = sns.load_dataset("iris")
-        show_graph_and_table(category_options_iris,num_options_iris,statistic_iris,iris,all_columns_iris)
+        show_graph_and_table(category_options_iris,num_options_iris,
+                             statistic_iris,iris,all_columns_iris)
 
     ### カテゴリーごとに散布図を表示
+    scatter_xy_list_iris = ['sepal_length','sepal_width','petal_length','petal_width']
+
     st.write(" \n \n ")
     st.subheader("カテゴリー変数ごとに散布図を表示")
     #x軸指標を選択
     num_options_x_iris = st.selectbox(
         '横軸に表示する数値尺度を選択してください',
-        ['sepal_length','sepal_width','petal_length','petal_width'],
+        scatter_xy_list_iris,
         key='iris_scatter_x'
     )
     #y軸指標を選択
     num_options_y_iris = st.selectbox(
         '縦軸に表示する数値尺度を選択してください',
-        ['sepal_length','sepal_width','petal_length','petal_width'],
+        scatter_xy_list_iris,
         key='iris_scatter_y'
     )
 
@@ -1822,10 +1900,14 @@ df = sns.load_dataset('iris')
         key='iris_scatter_category'
     )
 
-    if st.button('カテゴリごとにグラフを分割して表示',key='iris_scatter_by_category_button' ):
-        scatter_bycategory("iris",num_options_x_iris,num_options_y_iris,category_options_iris)
-    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='iris_scatter_by_category_button_onegrapgh' ):
-        scatter_bycategory_onegraph("iris",num_options_x_iris,num_options_y_iris,category_options_iris)
+    if st.button('カテゴリごとにグラフを分割して表示',
+                 key='iris_scatter_by_category_button' ):
+        scatter_bycategory("iris",num_options_x_iris,
+                           num_options_y_iris,category_options_iris)
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',
+                 key='iris_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("iris",num_options_x_iris,
+                                    num_options_y_iris,category_options_iris)
 
     
 
@@ -1921,22 +2003,26 @@ df = sns.load_dataset('mpg')
     # グラフと表を表示
     if st.button('統計量とグラフを表示する',key='mpg_stats_graph_button' ):
         mgp = sns.load_dataset("mpg")
-        show_graph_and_table(category_options_mgp,num_options_mgp,statistic_mgp,mgp,all_columns_mgp)
+        show_graph_and_table(category_options_mgp,num_options_mgp,
+                             statistic_mgp,mgp,all_columns_mgp)
 
     
     ### カテゴリーごとに散布図を表示
+    scatter_xy_list_mpg = ['mpg','cylinders','displacement','horsepower',
+                            'weight','acceleration','model_year']
+
     st.write(" \n \n ")
     st.subheader("カテゴリー変数ごとに散布図を表示")
     #x軸指標を選択
     num_options_x_mpg = st.selectbox(
         '横軸に表示する数値尺度を選択してください',
-        ['mpg','cylinders','displacement','horsepower','weight','acceleration','model_year'],
+        scatter_xy_list_mpg,
         key='mpg_scatter_x'
     )
     #y軸指標を選択
     num_options_y_mpg = st.selectbox(
         '縦軸に表示する数値尺度を選択してください',
-        ['mpg','cylinders','displacement','horsepower','weight','acceleration','model_year'],
+        scatter_xy_list_mpg,
         key='mpg_scatter_y'
     )
 
@@ -1947,11 +2033,15 @@ df = sns.load_dataset('mpg')
         key='mpg_scatter_category'
     )
 
-    if st.button('カテゴリごとにグラフを分割して表示',key='mpg_scatter_by_category_button' ):
-        scatter_bycategory("mpg",num_options_x_mpg,num_options_y_mpg,category_options_mpg)
+    if st.button('カテゴリごとにグラフを分割して表示',
+                 key='mpg_scatter_by_category_button' ):
+        scatter_bycategory("mpg",num_options_x_mpg,
+                           num_options_y_mpg,category_options_mpg)
 
-    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='mpg_scatter_by_category_button_onegrapgh' ):
-        scatter_bycategory_onegraph("mpg",num_options_x_mpg,num_options_y_mpg,category_options_mpg)
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',
+                 key='mpg_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("mpg",num_options_x_mpg,
+                                    num_options_y_mpg,category_options_mpg)
 
 
 
@@ -2056,18 +2146,21 @@ df = sns.load_dataset('penguins')
 
 
     ### カテゴリーごとに散布図を表示
+    scatter_xy_list = ['bill_length_mm','bill_depth_mm',
+                       'flipper_length_mm','body_mass_g']
+
     st.write(" \n \n ")
     st.subheader("カテゴリー変数ごとに散布図を表示")
     #x軸指標を選択
     num_options_x_penguins = st.selectbox(
         '横軸に表示する数値尺度を選択してください',
-        ['bill_length_mm','bill_depth_mm','flipper_length_mm','body_mass_g'],
+        scatter_xy_list,
         key='penguins_scatter_x'
     )
     #y軸指標を選択
     num_options_y_penguins = st.selectbox(
         '縦軸に表示する数値尺度を選択してください',
-        ['bill_length_mm','bill_depth_mm','flipper_length_mm','body_mass_g'],
+        scatter_xy_list,
         key='penguins_scatter_y'
     )
 
@@ -2078,11 +2171,15 @@ df = sns.load_dataset('penguins')
         key='penguins_scatter_category'
     )
 
-    if st.button('カテゴリごとにグラフを分割して表示',key='penguins_scatter_by_category_button' ):
-        scatter_bycategory("penguins",num_options_x_penguins,num_options_y_penguins,category_options_penguins)
+    if st.button('カテゴリごとにグラフを分割して表示',
+                 key='penguins_scatter_by_category_button' ):
+        scatter_bycategory("penguins",num_options_x_penguins,
+                           num_options_y_penguins,category_options_penguins)
 
-    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='penguins_scatter_by_category_button_onegrapgh' ):
-        scatter_bycategory_onegraph("penguins",num_options_x_penguins,num_options_y_penguins,category_options_penguins)
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',
+                 key='penguins_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("penguins",num_options_x_penguins,
+                                    num_options_y_penguins,category_options_penguins)
 
 
 # planetsデータ (グラフ要検討)
@@ -2179,18 +2276,20 @@ df = sns.load_dataset('planets')
 
 
     ### カテゴリーごとに散布図を表示
+    scatter_xy_list_planets = ['number','orbital_period','mass','distance','year']
+
     st.write(" \n \n ")
     st.subheader("カテゴリー変数ごとに散布図を表示")
     #x軸指標を選択
     num_options_x_planets = st.selectbox(
         '横軸に表示する数値尺度を選択してください',
-        ['number','orbital_period','mass','distance','year'],
+        scatter_xy_list_planets,
         key='planets_scatter_x'
     )
     #y軸指標を選択
     num_options_y_planets = st.selectbox(
         '縦軸に表示する数値尺度を選択してください',
-        ['number','orbital_period','mass','distance','year'],
+        scatter_xy_list_planets,
         key='planets_scatter_y'
     )
 
@@ -2201,14 +2300,18 @@ df = sns.load_dataset('planets')
         key='planets_scatter_category'
     )
 
-    if st.button('カテゴリごとにグラフを分割して表示',key='planets_scatter_by_category_button' ):
-        scatter_bycategory("planets",num_options_x_planets,num_options_y_planets,category_options_planets)
+    if st.button('カテゴリごとにグラフを分割して表示',
+                 key='planets_scatter_by_category_button' ):
+        scatter_bycategory("planets",num_options_x_planets,
+                           num_options_y_planets,category_options_planets)
 
-    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='planets_scatter_by_category_button_onegrapgh' ):
-        scatter_bycategory_onegraph("planets",num_options_x_planets,num_options_y_planets,category_options_planets)
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',
+                 key='planets_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("planets",num_options_x_planets,
+                                    num_options_y_planets,category_options_planets)
 
 
-# seaiceデータ (グラフ追加要検討)
+# seaiceデータ
 with tab20:      
     #データの概要を説明
     st.subheader("データの概要")
@@ -2273,10 +2376,13 @@ with tab21:
     st.subheader("データの概要")
     # 文章を挿入
     st.markdown('''
-    taxis（タクシーズ）は、ニューヨーク市（NYC）におけるイエローキャブ（タクシー）およびグリーンキャブの乗車・運行記録データです。\n
+    taxis（タクシーズ）は、ニューヨーク市（NYC）における
+    イエローキャブ（タクシー）およびグリーンキャブの乗車・運行記録データです。\n
 
-    乗車・降車の日時や場所、走行距離といった運行データから、運賃、チップ、支払い方法などの金銭的なデータまで幅広く含まれており、
-    データ分析、売上予測、GIS（地理情報システム）的な可視化、データクレンジングの練習に最適なデータセットです\n
+    乗車・降車の日時や場所、走行距離といった運行データから、
+    運賃、チップ、支払い方法などの金銭的なデータまで幅広く含まれており、
+    データ分析、売上予測、GIS（地理情報システム）的な可視化、
+    データクレンジングの練習に最適なデータセットです\n
 
     
     
@@ -2349,7 +2455,8 @@ df = sns.load_dataset('taxis')
     #カテゴリーを選択
     category_options_taxis = st.multiselect(
         '調べたいカテゴリ変数を選んでください',
-        ['color','payment','pickup_zone','dropoff_zone','pickup_borough','dropoff_borough'],
+        ['color','payment','pickup_zone',
+         'dropoff_zone','pickup_borough','dropoff_borough'],
         key='taxis_category_options'
     )
 
@@ -2373,18 +2480,20 @@ df = sns.load_dataset('taxis')
 
     
     ### カテゴリーごとに散布図を表示
+    scatter_xy_list_taxis = ['passengers','distance','fare','tip','tolls','total']
+
     st.write(" \n \n ")
     st.subheader("カテゴリー変数ごとに散布図を表示")
     #x軸指標を選択
     num_options_x_taxis = st.selectbox(
         '横軸に表示する数値尺度を選択してください',
-        ['passengers','distance','fare','tip','tolls','total'],
+        scatter_xy_list_taxis,
         key='taxis_scatter_x'
     )
     #y軸指標を選択
     num_options_y_taxis = st.selectbox(
         '縦軸に表示する数値尺度を選択してください',
-        ['passengers','distance','fare','tip','tolls','total'],
+        scatter_xy_list_taxis,
         key='taxis_scatter_y'
     )
 
@@ -2395,8 +2504,12 @@ df = sns.load_dataset('taxis')
         key='taxis_scatter_category'
     )
 
-    if st.button('カテゴリごとにグラフを分割して表示',key='taxis_scatter_by_category_button' ):
-        scatter_bycategory("taxis",num_options_x_taxis,num_options_y_taxis,category_options_taxis)
+    if st.button('カテゴリごとにグラフを分割して表示',
+                 key='taxis_scatter_by_category_button' ):
+        scatter_bycategory("taxis",num_options_x_taxis,
+                           num_options_y_taxis,category_options_taxis)
 
-    if st.button('カテゴリごとに色分けして1つのグラフに表示する',key='taxis_scatter_by_category_button_onegrapgh' ):
-        scatter_bycategory_onegraph("taxis",num_options_x_taxis,num_options_y_taxis,category_options_taxis)
+    if st.button('カテゴリごとに色分けして1つのグラフに表示する',
+                 key='taxis_scatter_by_category_button_onegrapgh' ):
+        scatter_bycategory_onegraph("taxis",num_options_x_taxis,
+                                    num_options_y_taxis,category_options_taxis)
